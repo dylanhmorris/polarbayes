@@ -1,0 +1,16 @@
+# virtual environment
+bin
+include
+lib
+pyvenv.cfg
+
+# emacs
+*~
+*#
+~*
+#*
+.#*
+.~*
+
+# build
+*.egg-info*
