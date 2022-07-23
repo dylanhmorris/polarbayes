@@ -3,7 +3,7 @@
 import polars as pl
 import numpy as np
 
-def spread_draws(posteriors, variable_names, variable_dim_names=None):
+def spread_draws(posteriors, variable_names):
     """
     Given a dictionary of posteriors,
     return a long-form polars dataframe 
@@ -12,12 +12,14 @@ def spread_draws(posteriors, variable_names, variable_dim_names=None):
     spread_draws() function).
     """
     n_variables = len(variable_names)
-    if variable_dim_names is None:
-        variable_dim_names = [None] * n_variables
         
-    for i_var, vn in enumerate(
-        zip(variable_names, variable_dim_names)):
-        v, v_dims = vn
+    for i_var, v in enumerate(variable_names):
+        if isinstance(v, str):
+            v_dims = None
+        else:
+            v_dims = v[1:]
+            v = v[0]
+            
         post = posteriors.get(v)
         long = post.flatten()[..., np.newaxis]
 
