@@ -10,18 +10,26 @@ def spread_draws(posteriors, variable_names):
     indexed by draw, with variable
     values (equivalent of tidybayes
     spread_draws() function).
+
+    :param posteriors: a dictionary of posteriors 
+    with variable names as keys and numpy ndarrays
+    as values (with the first axis corresponding 
+    to the posterior draw number.
+    :param variable_names: list of strings or 
+    of tuples identifying which variables to
+    retrieve.
     """
     n_variables = len(variable_names)
-        
+
     for i_var, v in enumerate(variable_names):
         if isinstance(v, str):
             v_dims = None
         else:
-            v_dims = v[1:]
+            v_dims = v[1]
             v = v[0]
             
         post = posteriors.get(v)
-        long = post.flatten()[..., np.newaxis]
+        long_post = post.flatten()[..., np.newaxis]
 
         indices = np.array(list(np.ndindex(post.shape)))
         n_dims = indices.shape[1] - 1
@@ -40,7 +48,7 @@ def spread_draws(posteriors, variable_names):
         
         p_df = pl.DataFrame(
             np.concatenate(
-                [indices, long],
+                [indices, long_post],
                 axis=1
             ),
         columns=[("draw", pl.Int64)] + dim_names + [(v, pl.Float64)])
@@ -49,7 +57,8 @@ def spread_draws(posteriors, variable_names):
             df = p_df
         else:
             df = df.join(p_df, 
-                         on=[col for col in df.columns if col in p_df.columns])
+                         on=[col for col in df.columns
+                             if col in p_df.columns])
         pass
     
     return df

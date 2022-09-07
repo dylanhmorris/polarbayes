@@ -12,5 +12,5 @@ setup(
    author='Dylan H. Morris',
    author_email='foomail@foo.example',
    url="http://www.foopackage.example/",
-   packages=['foo'],  #same as name
+   packages=['polarbayes'],  #same as name
 )

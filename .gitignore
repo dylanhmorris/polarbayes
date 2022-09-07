@@ -14,3 +14,6 @@ pyvenv.cfg
 
 # build
 *.egg-info*
+
+#macOS
+.DS_Store
