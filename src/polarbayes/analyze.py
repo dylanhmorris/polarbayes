@@ -20,12 +20,12 @@ def spread_draws(posteriors, variable_names):
     retrieve.
     """
     n_variables = len(variable_names)
-
+        
     for i_var, v in enumerate(variable_names):
         if isinstance(v, str):
             v_dims = None
         else:
-            v_dims = v[1]
+            v_dims = v[1:]
             v = v[0]
             
         post = posteriors.get(v)
