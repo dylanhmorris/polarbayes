@@ -1,23 +1,10 @@
-[build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
-
 [project]
-name = "PolarBayes"
-description = "PolarBayes: a package for tidy data handling of Markov Chain Monte Carlo output using Polars"
+name = "polarbayes"
+version = "0.1.0"
+description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.7"
-keywords = ["Bayesian", "Bayes", "Numpyro", "Polars"]
-license = {text = "BSD 3-Clause License"}
-classifiers = [
-    "Programming Language :: Python :: 3",
-]
+requires-python = ">=3.13"
 dependencies = [
-"polars >= 0.16.6",
-"pyarrow >= 11.0.0",
-"numpy >= 1.24.2"
+    "arviz>=0.22.0",
+    "polars>=1.31.0",
 ]
-dynamic = ["version"]
-
-[tool.setuptools.packages.find]
-where = ["src"]  # ["."] by default

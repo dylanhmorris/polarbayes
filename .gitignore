@@ -1,19 +1,8 @@
-# virtual environment
-bin
-include
-lib
-pyvenv.cfg
-
-# emacs
-*~
-*#
-~*
-#*
-.#*
-.~*
-
 # build
 *.egg-info*
 
-#macOS
-.DS_Store
+*.pyc
+
+__pycache__
+
+.venv

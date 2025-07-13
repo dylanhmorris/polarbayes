@@ -1,4 +1,4 @@
-# PolarBayes:
-## a python package for tidy data-style analysis of Bayesian inference output using the polars dataframe library
+# PolarBayes
+A python package for "tidy data"-style analysis of Bayesian inference output using the Polars dataframe library
 
-This package attempts to be a spiritual python port of Matthew Kay's excellent ``tidybayes`` package for the R/Tidyverse ecosystem.
+This package aims to be a spiritual Python port of the ``tidybayes`` package for the R/`tidyverse` ecosystem. It substitutes `polars` for the `tidyverse` and ArviZ `InferenceData` objects for `posterior::draws_df` objects.
