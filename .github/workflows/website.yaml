@@ -40,7 +40,7 @@ jobs:
         retention-days: "3"
 
   deploy-site:
-    #if: ${{ github.event_name == 'push' && github.ref_name == 'main' }} # test
+    if: ${{ github.event_name == 'push' && github.ref_name == 'main' }} # test
 
     runs-on: "ubuntu-latest"
     needs: "build-site"
