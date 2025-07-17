@@ -38,11 +38,10 @@ def gather_variables(
     return data.unpivot(
         index=index, variable_name=variable_name, value_name=value_name
     ).select(
-        pl.col("chain"),
-        pl.col("draw"),
-        pl.all().exclude(["chain", "draw"]),
-        # always start the df with chain, then draw, then any other index cols
-        # in alphabetical order
+        pl.col(exclude),
+        pl.all().exclude(exclude),
+        # always start the df with the "exclude" columns (default "chain"
+        # and "draw"), then any other index cols in alphabetical order
     )
 
 
