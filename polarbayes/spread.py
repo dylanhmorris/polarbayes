@@ -1,6 +1,7 @@
+from typing import Iterable
+
 import numpy as np
 import polars as pl
-from typing import Iterable
 
 
 def spread_draws(
@@ -45,11 +46,14 @@ def spread_draws(
         n_dims = indices.shape[1] - 1
         if v_dims is None:
             dim_names = [
-                ("{}_dim_{}_index".format(v, k), pl.Int64) for k in range(n_dims)
+                ("{}_dim_{}_index".format(v, k), pl.Int64)
+                for k in range(n_dims)
             ]
         elif len(v_dims) != n_dims:
             raise ValueError(
-                "incorrect number of dimension names provided for variable {}".format(v)
+                "incorrect number of dimension names provided for variable {}".format(
+                    v
+                )
             )
         else:
             dim_names = [(v_dim, pl.Int64) for v_dim in v_dims]
@@ -62,7 +66,9 @@ def spread_draws(
         if i_var == 0:
             df = p_df
         else:
-            df = df.join(p_df, on=[col for col in df.columns if col in p_df.columns])
+            df = df.join(
+                p_df, on=[col for col in df.columns if col in p_df.columns]
+            )
         pass
 
     return df
@@ -88,7 +94,9 @@ def spread_and_recover_ids(
 
             if keep_internal:
                 new_cols.append(
-                    temp_spread.get_column(dim_name).alias(dim_name + "_internal")
+                    temp_spread.get_column(dim_name).alias(
+                        dim_name + "_internal"
+                    )
                 )
 
     return temp_spread.with_columns(new_cols)
