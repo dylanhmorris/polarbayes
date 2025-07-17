@@ -1,8 +1,9 @@
+from typing import Iterable
+
 import arviz as az
 import numpy as np
 import pandas as pd
 import polars as pl
-from typing import Iterable
 
 
 def spread_draws_to_pandas_(
@@ -132,16 +133,6 @@ def spread_draws_and_get_index_cols(
     if enforce_drop_chain_draw:
         df = df.drop(["chain", "draw"], axis=1)
     return (pl.DataFrame(df.reset_index()), tuple(df.index.names))
-
-
-def _assert_not_in_index_columns(arg_name, arg_value, index_columns) -> None:
-    if arg_value in index_columns:
-        raise ValueError(
-            f"Specified {arg_name}='{arg_value}' for the output data frame "
-            f"but there is an index column named '{arg_value}' "
-            f"in the input data frame. Either specify a different {arg_name} "
-            f"or rename the index column named '{arg_value}'."
-        )
 
 
 def spread_draws(
