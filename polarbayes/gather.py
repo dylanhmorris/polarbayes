@@ -68,8 +68,10 @@ def gather_variables(
         `["chain", "draw"]` if they are present. Those are the MCMC
         index columns created when `spread_draws()` is on a standard
         `az.InferenceData` object.
+
     value_name
         Name for the value column in the output DataFrame. Default `"value"`.
+
     variable_name
         Name for the variable column in the output DataFrame. Default `"variable"`.
 
@@ -110,7 +112,51 @@ def gather_draws(
     filter_vars: str = None,
     num_samples: int = None,
     rng: bool | int | np.random.Generator = None,
+    value_name: str = "value",
+    variable_name: str = "variable",
 ) -> pl.DataFrame:
+    """
+    Convert an ArviZ InferenceData object to a polars
+    DataFrame of tidy (gathered) draws, using the syntax of
+    `arviz.extract`.
+        Parameters
+    ----------
+    data
+        Data to convert.
+
+    group
+        `group` parameter passed to `az.extract`.
+
+    combined
+        `combined` parameter passed to `az.extract`.
+
+    var_names
+        `var_names` parameter passed to `az.extract`.
+
+    filter_vars
+        `var_names` parameter passed to `az.extract`.
+
+    num_samples
+        `num_samples` parameter passed to `az.extract`.
+
+    rng
+        `rng` parameter passed to `az.extract`.
+
+    value_name
+        Name for the value column in the output DataFrame. Default `"value"`.
+
+    variable_name
+        Name for the variable column in the output DataFrame. Default `"variable"`.
+
+    Returns
+    -------
+    pl.DataFrame
+        The DataFrame of tidy (gathered) draws, including
+        standard columns to identify a unique sample
+        (typically `"chain"` and "draw"`), a column of variable
+        names, a column of associated variable values,
+        plus (as needed) columns that index array-valued variables.
+    """
     # need to extract all variables jointly to ensure same
     # draws for each
     extracted = az.extract(
@@ -136,7 +182,9 @@ def gather_draws(
                     num_samples=None,
                     rng=False,
                     enforce_drop_chain_draw=combined,
-                )
+                ),
+                variable_name="variable",
+                value_name="value",
             )
             for var in var_names
         ],
