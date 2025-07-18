@@ -108,7 +108,7 @@ def spread_draws_and_get_index_cols(
         `var_names` parameter passed to `az.extract`.
 
     filter_vars
-        `var_names` parameter passed to `az.extract`.
+        `filter_vars` parameter passed to `az.extract`.
 
     num_samples
         `num_samples` parameter passed to `az.extract`.
