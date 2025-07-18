@@ -119,7 +119,8 @@ def gather_draws(
     Convert an ArviZ InferenceData object to a polars
     DataFrame of tidy (gathered) draws, using the syntax of
     `arviz.extract`.
-        Parameters
+
+    Parameters
     ----------
     data
         Data to convert.
