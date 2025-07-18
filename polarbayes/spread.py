@@ -35,7 +35,7 @@ def spread_draws_to_pandas_(
         `var_names` parameter passed to `az.extract`.
 
     filter_vars
-        `var_names` parameter passed to `az.extract`.
+        `filter_vars` parameter passed to `az.extract`.
 
     num_samples
         `num_samples` parameter passed to `az.extract`.
