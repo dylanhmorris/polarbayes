@@ -9,7 +9,6 @@ dependencies = [
     "polars>=1.31.0",
 ]
 
-[project]
 license = "Apache-2.0"
 
 [dependency-groups]
