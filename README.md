@@ -1,3 +1,6 @@
+# Archived repository
+Active development has moved to [`cdcgov/polarbayes`](https://github.com/cdcgov/polarbayes)
+
 # PolarBayes
 A python package for "tidy data"-style analysis of Bayesian inference output using the Polars dataframe library
 
